@@ -10,7 +10,89 @@
           "version": "1.0.0",
           "semanticVersion": "1.0.0",
           "informationUri": "https://www.glog.ai",
-          "rules": [],
+          "rules": [
+            {
+              "id": "96ba2ec7-a83d-3117-aead-3deb98654276",
+              "name": "\"addEventListener API Vulnerability to Cross Origin Attacks and XSS due to Lack of Origin Validation\"",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `addEventListener` API in JavaScript is used to register an event handler to a specific event such as 'click', 'load', 'keydown', etc. on a specific element. The vulnerability arises when the event handler is used to process untrusted data without validating the origin of the event. This can lead to Cross-Origin attacks where an attacker can trick a user into triggering the event from a different origin. It can also lead to Cross-Site Scripting (XSS) attacks where an attacker can inject malicious scripts into the web page.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to always validate the origin of the event before processing the event data. This can be done by checking the `event.origin` property in the event handler function. If the origin is not expected, the function should not process the event data.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the provided code:\n\n```javascript\nwindow.addEventListener('pointerdown', (event) => {\n  // Check the origin of the event\n  if (event.origin === 'http://expected.origin.com') {\n    setKeyboardNavMode(false);\n  }\n}, true);\n```\n\nIn this code, the event handler function checks the origin of the event before calling `setKeyboardNavMode(false)`. If the origin is not 'http://expected.origin.com', the function does nothing.\n\n## Library Dependencies\n\nThe provided code does not require any library dependencies to execute properly.\n\n## OWASP and CWE Links\n\n- [OWASP Cross-Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/)\n- [OWASP Unvalidated Redirects and Forwards Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html)\n- [CWE-346: Origin Validation Error](https://cwe.mitre.org/data/definitions/346.html)\n- [CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')](https://cwe.mitre.org/data/definitions/79.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-346",
+                    "url": "https://cwe.mitre.org/data/definitions/346.html"
+                  },
+                  {
+                    "id": "CWE-79",
+                    "url": "https://cwe.mitre.org/data/definitions/79.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-346",
+                  "CWE-79"
+                ]
+              }
+            },
+            {
+              "id": "4a007ecc-0ea9-3bb3-bd72-87cf99c2136c",
+              "name": "\"addEventListener API Vulnerability to Cross Origin Attacks and XSS\"",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `addEventListener` API in JavaScript is used to attach an event handler to a specified element. However, it can be vulnerable to Cross-Origin attacks and Cross-Site Scripting (XSS) attacks if the origin of the event is not properly validated. In the provided code snippet, an event listener is added to the window object to listen for 'keydown' events. If the key pressed is 'Tab', a function `setKeyboardNavMode(true)` is called. This code does not validate the origin of the event, making it susceptible to attacks where malicious scripts from different origins can trigger the event and execute arbitrary code.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to validate the origin of the event before executing any code. This can be done by checking the `origin` property of the event object, which contains the origin of the document that initiated the event. If the origin does not match the expected origin, the event handler should not execute any code.\n\n## Source Code Fix Recommendation\n\nHere is a recommended fix for the provided code snippet:\n\n```javascript\nwindow.addEventListener('keydown', (e) => {\n  // Check the origin of the event\n  if (e.origin !== window.location.origin) {\n    // If the origin does not match, do not execute any code\n    return;\n  }\n\n  if (e.key === 'Tab') setKeyboardNavMode(true);\n}, true);\n```\n\n## Library Dependencies\n\nThe provided code snippet does not appear to require any specific library dependencies to execute properly.\n\n## OWASP and CWE Resources\n\n- [OWASP Cross-Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/)\n- [OWASP Unvalidated Redirects and Forwards Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Unvalidated_Redirects_and_Forwards_Cheat_Sheet.html)\n- [CWE-346: Origin Validation Error](https://cwe.mitre.org/data/definitions/346.html)\n- [CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')](https://cwe.mitre.org/data/definitions/79.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-346",
+                    "url": "https://cwe.mitre.org/data/definitions/346.html"
+                  },
+                  {
+                    "id": "CWE-79",
+                    "url": "https://cwe.mitre.org/data/definitions/79.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-346",
+                  "CWE-79"
+                ]
+              }
+            },
+            {
+              "id": "956eb0c9-31a3-308f-bdfc-d6b402b32e3c",
+              "name": "\"addEventListener API Vulnerability to Cross Origin Attacks and XSS\"",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe `addEventListener` API in JavaScript is used to attach an event handler to a specified element. However, it can be vulnerable to Cross-Origin attacks and Cross-Site Scripting (XSS) attacks if not properly implemented. In the provided code, the event listener is attached to the `window` object and listens for the `keydown` event. If the event is triggered, it executes a callback function that could potentially be exploited by an attacker.\n\nCross-Origin attacks occur when a script from a different origin is allowed to run and manipulate the DOM. This can lead to information leakage, data theft, or other malicious activities.\n\nCross-Site Scripting (XSS) attacks occur when an attacker is able to inject malicious scripts into web pages viewed by other users. These scripts can steal sensitive information, manipulate web content, or perform other malicious actions.\n\n## Mitigation Advice\n\nTo mitigate these vulnerabilities, you should:\n\n- Always validate and sanitize user input to prevent XSS attacks.\n- Use the `Content-Security-Policy` HTTP header to restrict the sources from which scripts can be loaded.\n- Avoid using inline event handlers and script blocks.\n- Use the `rel=\"noopener\"` attribute when opening a new window through a link to prevent the new page from accessing your window object.\n\n## Source Code Fix Recommendation\n\nThe provided code does not seem to have any explicit vulnerabilities related to Cross-Origin attacks or XSS attacks. However, if the functions `isEditableElement`, `isInteractiveTarget`, and `handleScrollKeys` are handling user input or manipulating the DOM, they should be reviewed for potential vulnerabilities.\n\n## Library Dependencies\n\nThe provided code does not seem to require any specific library dependencies to execute properly.\n\n## References\n\n- [OWASP XSS Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)\n- [OWASP DOM based XSS Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html)\n- [CWE-79: Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')](https://cwe.mitre.org/data/definitions/79.html)\n- [CWE-346: Origin Validation Error](https://cwe.mitre.org/data/definitions/346.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-79",
+                    "url": "https://cwe.mitre.org/data/definitions/79.html"
+                  },
+                  {
+                    "id": "CWE-346",
+                    "url": "https://cwe.mitre.org/data/definitions/346.html"
+                  }
+                ],
+                "severity": "MEDIUM",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-79",
+                  "CWE-346"
+                ]
+              }
+            }
+          ],
           "language": "en-US",
           "contents": [
             "localizedData",
@@ -20,7 +102,113 @@
         }
       },
       "language": "en-US",
-      "results": [],
+      "results": [
+        {
+          "ruleId": "96ba2ec7-a83d-3117-aead-3deb98654276",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "\"addEventListener API Vulnerability to Cross Origin Attacks and XSS due to Lack of Origin Validation\""
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "assets/js/collection_table.js",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 35,
+                  "startColumn": 5,
+                  "endLine": 37,
+                  "endColumn": 13,
+                  "snippet": {
+                    "text": "    window.addEventListener('pointerdown', () => {\n      setKeyboardNavMode(false);\n    }, true);"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "ef68bdad2222cfd5705000a7624baa119d55efbbda2e724f81971d00f4548f12",
+            "glog-pfp-ruleFileCode/v1": "ec497729a2dbccb7c09183671cbfc0dc0e4be67a30796610b2bc9601a2b61f0e"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "ec497729a2dbccb7c09183671cbfc0dc0e4be67a30796610b2bc9601a2b61f0e"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "4a007ecc-0ea9-3bb3-bd72-87cf99c2136c",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "\"addEventListener API Vulnerability to Cross Origin Attacks and XSS\""
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "assets/js/collection_table.js",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 31,
+                  "startColumn": 5,
+                  "endLine": 33,
+                  "endColumn": 13,
+                  "snippet": {
+                    "text": "    window.addEventListener('keydown', (e) => {\n      if (e.key === 'Tab') setKeyboardNavMode(true);\n    }, true);"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "4bba6313882dbca6eae2d1ca7549b14108c9423958d02e9865b6ed57dcdb5924",
+            "glog-pfp-ruleFileCode/v1": "ed2565e130b30a5e7b14e2e54f40e0d67226792355c5b32d652fcf97b7863097"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "ed2565e130b30a5e7b14e2e54f40e0d67226792355c5b32d652fcf97b7863097"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "956eb0c9-31a3-308f-bdfc-d6b402b32e3c",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "\"addEventListener API Vulnerability to Cross Origin Attacks and XSS\""
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "assets/js/collection_table.js",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 111,
+                  "startColumn": 5,
+                  "endLine": 122,
+                  "endColumn": 13,
+                  "snippet": {
+                    "text": "    window.addEventListener('keydown', (e) => {\n      if (!hoveredWrap) return;\n\n      if (isEditableElement(document.activeElement)) return;\n\n      const active = document.activeElement;\n      if (active && hoveredWrap.contains(active)) return;\n\n      if (isInteractiveTarget(e.target)) return;\n\n      handleScrollKeys(hoveredWrap, e, false);\n    }, true);"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "283d9b3f55736242d78f3d375998fdf937d6b20de84aaeaa2e4f4ea56893dac4",
+            "glog-pfp-ruleFileCode/v1": "2e99d358ac1a57b4c13b1cac054a1a3fdd1042855b6afe329ee77075356200c9"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "2e99d358ac1a57b4c13b1cac054a1a3fdd1042855b6afe329ee77075356200c9"
+          },
+          "properties": {}
+        }
+      ],
       "newlineSequences": [
         "\r\n",
         "\n"
