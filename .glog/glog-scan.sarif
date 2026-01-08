@@ -104,41 +104,6 @@
       "language": "en-US",
       "results": [
         {
-          "ruleId": "96ba2ec7-a83d-3117-aead-3deb98654276",
-          "kind": "fail",
-          "level": "warning",
-          "message": {
-            "text": "\"addEventListener API Vulnerability to Cross Origin Attacks and XSS due to Lack of Origin Validation\""
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "assets/js/collection_table.js",
-                  "uriBaseId": "%SRCROOT%"
-                },
-                "region": {
-                  "startLine": 35,
-                  "startColumn": 5,
-                  "endLine": 37,
-                  "endColumn": 13,
-                  "snippet": {
-                    "text": "    window.addEventListener('pointerdown', () => {\n      setKeyboardNavMode(false);\n    }, true);"
-                  }
-                }
-              }
-            }
-          ],
-          "partialFingerprints": {
-            "glog-pfp-ruleFileLineCode/v1": "ef68bdad2222cfd5705000a7624baa119d55efbbda2e724f81971d00f4548f12",
-            "glog-pfp-ruleFileCode/v1": "ec497729a2dbccb7c09183671cbfc0dc0e4be67a30796610b2bc9601a2b61f0e"
-          },
-          "fingerprints": {
-            "glog-fp-ruleFileCode/v1": "ec497729a2dbccb7c09183671cbfc0dc0e4be67a30796610b2bc9601a2b61f0e"
-          },
-          "properties": {}
-        },
-        {
           "ruleId": "4a007ecc-0ea9-3bb3-bd72-87cf99c2136c",
           "kind": "fail",
           "level": "warning",
@@ -170,6 +135,41 @@
           },
           "fingerprints": {
             "glog-fp-ruleFileCode/v1": "ed2565e130b30a5e7b14e2e54f40e0d67226792355c5b32d652fcf97b7863097"
+          },
+          "properties": {}
+        },
+        {
+          "ruleId": "96ba2ec7-a83d-3117-aead-3deb98654276",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "\"addEventListener API Vulnerability to Cross Origin Attacks and XSS due to Lack of Origin Validation\""
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "assets/js/collection_table.js",
+                  "uriBaseId": "%SRCROOT%"
+                },
+                "region": {
+                  "startLine": 35,
+                  "startColumn": 5,
+                  "endLine": 37,
+                  "endColumn": 13,
+                  "snippet": {
+                    "text": "    window.addEventListener('pointerdown', () => {\n      setKeyboardNavMode(false);\n    }, true);"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "ef68bdad2222cfd5705000a7624baa119d55efbbda2e724f81971d00f4548f12",
+            "glog-pfp-ruleFileCode/v1": "ec497729a2dbccb7c09183671cbfc0dc0e4be67a30796610b2bc9601a2b61f0e"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "ec497729a2dbccb7c09183671cbfc0dc0e4be67a30796610b2bc9601a2b61f0e"
           },
           "properties": {}
         },
